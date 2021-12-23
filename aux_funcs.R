@@ -1,3 +1,4 @@
+
 ## You MUST specify the arguments to this function as parTab, data then PRIOR_FUNC. 
 ## Use the `...` to pass additional arguments through.
 my_creation_function <- function(parTab, data, PRIOR_FUNC, ...){
