@@ -1,16 +1,18 @@
 suppressPackageStartupMessages(library(ggplot2))
 library(malariasimulation)
 library(malariaEquilibrium)
-library(reshape2)
+library(lazymcmc)
+source("aux_funcs.R")
 
 year <- 365
 month <- 30
+human_population <- 1000
 
 # Fake observed prevalence at 85 days after start
 data <- 0.7
 
 # MCMC stuff
-parTab <- data.frame(values=c(365, 50, 500),
+parTab <- data.frame(values=c(90, 50, 500),
                      names=c("sim_length",
                              "starting_EIR",
                              "human_population"),

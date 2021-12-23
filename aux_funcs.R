@@ -19,6 +19,7 @@ my_creation_function <- function(parTab, data, PRIOR_FUNC, ...){
     names(pars) <- parameter_names
     sim_length <- pars["sim_length"]
     starting_EIR <- pars["starting_EIR"]
+    human_population <- pars["human_population"]
     
     
     simparams <- get_parameters(
@@ -36,26 +37,27 @@ my_creation_function <- function(parTab, data, PRIOR_FUNC, ...){
     
     simparams <- set_equilibrium(simparams, starting_EIR)
     
-    bednetparams <- simparams
+    # bednetparams <- simparams
     
-    bednet_events = data.frame(
-      timestep = 90,
-      name=c("Bednets")
-    )
+    # bednet_events = data.frame(
+    #  timestep = 90,
+    #  name=c("Bednets")
+    #)
     
-    bednetparams <- set_bednets(
-      bednetparams,
-      timesteps = bednet_events$timestep,
-      coverages = c(.8),
-      retention = 5 * year,
-      dn0 = matrix(c(.533), nrow=1, ncol=1),
-      rn = matrix(c(.56), nrow=1, ncol=1),
-      rnm = matrix(c(.24), nrow=1, ncol=1),
-      gamman = 2.64 * 365
-    )
+    #bednetparams <- set_bednets(
+    #  bednetparams,
+    #  timesteps = bednet_events$timestep,
+    #  coverages = c(.8),
+    #  retention = 5 * year,
+    #  dn0 = matrix(c(.533), nrow=1, ncol=1),
+    #  rn = matrix(c(.56), nrow=1, ncol=1),
+    #  rnm = matrix(c(.24), nrow=1, ncol=1),
+    #  gamman = 2.64 * 365
+    #)
     
     print("Sim starting")
-    output <- run_simulation(sim_length, bednetparams)
+    #output <- run_simulation(sim_length, bednetparams)
+    output <- run_simulation(sim_length, simparams)
     print("Sim finished")
     
     model_prev <- (output$n_detect_730_3650 / output$n_730_3650)[85]
